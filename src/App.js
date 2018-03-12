@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import FlexBox from './FlexBoxPlayground';
 import logo from './logo.svg';
 import './App.css';
 
@@ -13,6 +14,7 @@ class App extends Component {
         <p className="App-intro">
           Please edit flex-box properties to see the effects.
         </p>
+        <FlexBox />
       </div>
     );
   }
