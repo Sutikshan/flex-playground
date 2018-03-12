@@ -11,7 +11,7 @@ export default class FlexBoxCustomizable extends Component {
     }
 
     this.onCustomStyleChange = (keyName, value) => {
-      const customContainerStyles = { ...customContainerStyles };
+      const customContainerStyles = { ...this.state.customContainerStyles };
       customContainerStyles[keyName] = value;
       this.setState({ customContainerStyles });
     };

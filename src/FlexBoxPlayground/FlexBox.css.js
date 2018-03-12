@@ -15,7 +15,7 @@ export default {
   flexContainer: Object.assign(
     {},
     {
-      display: "inline-flex"
+      display: "flex"
     },
     { ...flexContainerDefaults }
   ),
