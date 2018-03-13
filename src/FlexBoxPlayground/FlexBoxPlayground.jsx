@@ -22,7 +22,13 @@ export default class FlexBoxPlayground extends Component {
         />
         <FlexBoxCustomizable
           heading="Flex Line Wrapping: flex-wrap"
-          containerPropsToCustomize={{display, flexDirection, flexWrap, flexFlow}}
+          containerPropsToCustomize={{display, flexDirection, flexWrap}}
+          containerStyles={{width: "15%", height: "30em" }}
+          itemCount={9}
+        />
+        <FlexBoxCustomizable
+          heading="Flex Direction + Line Wrapping: flex-flow"
+          containerPropsToCustomize={{display, flexFlow}}
           containerStyles={{width: "15%", height: "30em" }}
           itemCount={9}
         />
