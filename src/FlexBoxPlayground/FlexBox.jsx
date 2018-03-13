@@ -29,7 +29,7 @@ export default class FlexBox extends Component {
 FlexBox.propTypes = {
   containerStyles: PropTypes.object,
   itemStyles: PropTypes.object,
-  itemCount: PropTypes.Number,
+  itemCount: PropTypes.number,
 };
 
 FlexBox.defaultProps = {

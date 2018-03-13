@@ -22,10 +22,10 @@ export default class FlexBoxCustomizable extends Component {
       <h4>{ heading }</h4>
       { Object.keys(containerPropsToCustomize).map((keyName) => {
         return (
-          <div>
+          <div key={keyName}>
             <div>{keyName}: </div>
             <select onChange={(event) => this.onCustomStyleChange(keyName, event.target.value)}>
-              { containerPropsToCustomize[keyName].map((propVal) => (<option>{propVal}</option>)) }
+              { containerPropsToCustomize[keyName].map((propVal) => (<option key={propVal}>{propVal}</option>)) }
             </select>
           </div>
         )
@@ -45,7 +45,7 @@ FlexBoxCustomizable.propTypes = {
   itemPropsToCustomize: PropTypes.object,
   containerStyles: PropTypes.object,
   itemStyles: PropTypes.object,
-  itemCount: PropTypes.Number,
+  itemCount: PropTypes.number,
 };
 
 FlexBoxCustomizable.defaultProps = {

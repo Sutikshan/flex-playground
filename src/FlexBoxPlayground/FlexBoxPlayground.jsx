@@ -4,11 +4,29 @@ import FlexBoxCustomizable from './FlexBoxCustomizable.jsx';
 
 export default class FlexBoxPlayground extends Component {
   render() {
+    const {
+      display,
+      flexDirection,
+      flexWrap,
+      flexFlow,
+    } = FlexBoxConstants.FlexContainerProps;
     return (
-      <FlexBoxCustomizable
-        heading="The Flex Container"
-        containerPropsToCustomize={FlexBoxConstants.FlexContainerProps}
-       />
+      <div>
+        <FlexBoxCustomizable
+          heading="The Flex Container"
+          containerPropsToCustomize={{display}}
+        />
+        <FlexBoxCustomizable
+          heading="Flex Flow Direction: flex-direction"
+          containerPropsToCustomize={{display, flexDirection}}
+        />
+        <FlexBoxCustomizable
+          heading="Flex Line Wrapping: flex-wrap"
+          containerPropsToCustomize={{display, flexDirection, flexWrap, flexFlow}}
+          containerStyles={{width: "15%", height: "30em" }}
+          itemCount={9}
+        />
+      </div>
     );
   }
 }
