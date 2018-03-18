@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import FlexBox from './FlexBox.jsx';
+import  './FlexBoxPlayground.css';
 
 export default class FlexBoxCustomizable extends Component {
   constructor(props) {
@@ -22,9 +23,10 @@ export default class FlexBoxCustomizable extends Component {
       <h4>{ heading }</h4>
       { Object.keys(containerPropsToCustomize).map((keyName) => {
         return (
-          <div key={keyName}>
-            <div>{keyName}: </div>
-            <select onChange={(event) => this.onCustomStyleChange(keyName, event.target.value)}>
+          <div key={keyName} className="prop-key-value-pair">
+            <div className="prop-key">{keyName}: </div>
+
+            <select className="prop-value" onChange={(event) => this.onCustomStyleChange(keyName, event.target.value)}>
               { containerPropsToCustomize[keyName].map((propVal) => (<option key={propVal}>{propVal}</option>)) }
             </select>
           </div>
