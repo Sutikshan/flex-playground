@@ -13,8 +13,14 @@ class App extends Component {
             <a href="#" className="button button-01">
               FlexContainer
             </a>
-            <a href="#" className="button button-01">
+            <a href="#" className="button button-02">
               Flexibility
+            </a>
+            <a href="#" className="button button-03">
+              Alignment
+            </a>
+            <a href="#" className="button button-03">
+              RealWorld
             </a>
           </div>
         </header>
