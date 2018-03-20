@@ -19,7 +19,6 @@
 .Menu-bar {
   display: flex;
   width: 40%;
-  align-self: center;
   justify-content: space-around;
 }
 

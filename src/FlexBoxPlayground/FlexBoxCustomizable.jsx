@@ -56,5 +56,5 @@ FlexBoxCustomizable.defaultProps = {
   itemPropsToCustomize: {},
   containerStyles: {},
   itemStyles: {},
-  itemCount: 3,
+  itemCount: 4,
 };
