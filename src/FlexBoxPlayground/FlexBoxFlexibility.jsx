@@ -12,7 +12,7 @@ export default class FlexBoxFlexibility extends Component {
       flexShrink,
       flexBasis,
       flex,
-    } = FlexBoxConstants.FlexContainerProps;
+    } = FlexBoxConstants.FlexItemsProps;
 
     return (
       <div>

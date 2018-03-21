@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 const FlexContainerProps = {
     display: ['flex', 'inline-flex'],
     flexDirection: ['row', 'row-reverse', 'column', 'column-reverse'],
