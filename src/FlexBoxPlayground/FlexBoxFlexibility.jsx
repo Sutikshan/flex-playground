@@ -17,7 +17,7 @@ export default class FlexBoxFlexibility extends Component {
     return (
       <div>
         <FlexBoxCustomizable
-          heading="The Flex Container"
+          heading="The Flex Items"
           containerPropsToCustomize={{flexFlow}}
           itemPropsToCustomize={{flex}}
         />

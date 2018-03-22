@@ -35,12 +35,14 @@ class App extends Component {
                 </a>
               </div>
             </header>
+            <p className="App-intro">Please edit flex-box properties to see the effects.</p>
             <Route exact path="/" component={FlexBoxPlayground} />
             <Route path="/FlexBoxPlayground" component={FlexBoxPlayground} />
             <Route path="/Flexibility" component={FlexBoxFlexibility} />
           </div>
+
         </Router>
-        <p className="App-intro">Please edit flex-box properties to see the effects.</p>
+        
       </div>
     );
   }
