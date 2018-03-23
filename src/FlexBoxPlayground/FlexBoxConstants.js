@@ -7,9 +7,6 @@ const FlexContainerProps = {
 };
 
 const FlexItemsProps = {
-    flexGrow: ['0', '1', '2', '3', '4'],
-    flexShrink: ['0', '1', '2', '3', '4'],
-    flexBasis: "auto",
     flex: '0 0 auto',
   };
 
