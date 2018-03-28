@@ -1,0 +1,42 @@
+.Playground {
+    text-align: center;
+  }
+  
+  .Playground-header {
+    background-color: #222;
+    height: 35px;
+    padding: 20px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .Playground-title {
+    font-size: 1.5em;
+    align-self: center;
+  }
+  
+  .Menu-bar {
+    display: flex;
+    width: 30em;
+    justify-content: space-around;
+  }
+  
+  .button {
+    background-color: #9BC850;
+    border-radius: 8px;
+    box-sizing: border-box;
+    color: #fff;
+    display: block;
+    font-weight: 100;
+    font-size: 1em;
+    margin: 0;
+    padding: 0.5em 1em;
+    text-align: center;
+    flex: 0 1 6em;
+  }
+  
+  .Playground-header-intro {
+    font-size: large;
+  }
+  
