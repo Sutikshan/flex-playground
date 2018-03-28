@@ -1,0 +1,28 @@
+.property-section {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 1em;
+}
+.containe-props {
+text-align: left;
+}
+.item-props {
+  text-align: left;
+  width: 50%;
+}
+.prop-key-value-pair {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  .prop-key-value-pair > .prop-key {
+    flex-basis: 40%;
+    text-align: left;
+    margin-bottom: 0.5em;
+  }
+  .prop-key-value-pair > .prop-value {
+    text-align: left;
+    flex-basis: 60%;
+    margin-bottom: 0.5em;
+  }

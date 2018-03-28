@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import FlexBoxConstants from './FlexBoxConstants';
-import FlexBoxCustomizable from './FlexBoxCustomizable.jsx';
+import FlexBoxCustomizable from './FlexBox';
 
 export default class FlexBoxFlexibility extends Component {
   render() {
@@ -20,6 +20,7 @@ export default class FlexBoxFlexibility extends Component {
           heading="The Flex Items"
           containerPropsToCustomize={{flexFlow}}
           itemPropsToCustomize={{flex}}
+          itemPropsToDisplay={`flex: ${flex}`}
         />
       </div>
     );

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import FlexBoxConstants from './FlexBoxConstants';
-import FlexBoxCustomizable from './FlexBoxCustomizable.jsx';
+import FlexBoxCustomizable from './FlexBox';
 
 export default class FlexBoxPlayground extends Component {
   render() {

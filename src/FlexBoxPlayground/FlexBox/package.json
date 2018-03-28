@@ -1,0 +1,5 @@
+{
+    "name": "Customizable",
+    "private": true,
+    "main": "./Customizable.jsx"
+  }

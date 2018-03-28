@@ -15,7 +15,9 @@ export default class FlexBox extends Component {
             <FlexBoxItem
               onItemClick={this.props.onItemClick}
               itemIndex={index}
-              itemStyle={Object.assign({}, flextStyles.flexItem(index), this.props.itemStyles[index])} />
+              itemStyle={Object.assign({}, flextStyles.flexItem(index), this.props.itemStyles[index])}
+              itemPropsToDisplay={this.props.itemPropsToDisplay}
+              />
           );
         })}
       </div>
@@ -26,6 +28,7 @@ export default class FlexBox extends Component {
 FlexBox.propTypes = {
   containerStyles: PropTypes.object,
   itemStyles: PropTypes.object,
+  itemPropsToDisplay: PropTypes.string,
   itemCount: PropTypes.number,
   onItemClick: PropTypes.func.isRequired,
 };

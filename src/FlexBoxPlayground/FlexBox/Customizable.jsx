@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import FlexBox from './FlexBox.jsx';
-import  './FlexBoxPlayground.css';
+import  './Customizable.css';
 
 export default class FlexBoxCustomizable extends Component {
   constructor(props) {
@@ -35,44 +35,48 @@ export default class FlexBoxCustomizable extends Component {
   render() {
     const { containerPropsToCustomize, heading, itemPropsToCustomize } = this.props;
     const { currentItemIndex } = this.state;
+
     return (<div>
       <h4>{ heading }</h4>
-      <div className="containerProps">
-      <h3>Flex Container Props</h3>
-      { Object.keys(containerPropsToCustomize).map((keyName) => {
-        return (
-          <div key={keyName} className="prop-key-value-pair">
-            <div className="prop-key">{keyName}: </div>
-
-            <select className="prop-value" onChange={(event) => this.onCustomStyleChange(keyName, event.target.value)}>
-              { containerPropsToCustomize[keyName].map((propVal) => (<option key={propVal}>{propVal}</option>)) }
-            </select>
-          </div>
-        )
-      }) }
-      </div>
-      <div className="itemProps">
-      <h3>Flex Item Props</h3>
-      {
-        Object.keys(itemPropsToCustomize).map((keyName) => {
-          const { customItemStyles } = this.state;
-          const itemValue = (customItemStyles[currentItemIndex] && customItemStyles[currentItemIndex][keyName]) || '1 1 auto';
-
+      <div className="property-section">
+        <div className="containe-props">
+        <h4>Flex Container Props</h4>
+        { Object.keys(containerPropsToCustomize).map((keyName) => {
           return (
-          <div key={keyName} className="prop-key-value-pair">
-            <div className="prop-key">{keyName}{`(Item ${this.state.currentItemIndex + 1})`}: </div>
-            <input
-              className="prop-value"
-              value={itemValue}
-              onChange={(event) => this.onItemStyleChange(currentItemIndex, keyName, event.target.value)} />
-          </div>
+            <div key={keyName} className="prop-key-value-pair">
+              <div className="prop-key">{keyName}: </div>
+
+              <select className="prop-value" onChange={(event) => this.onCustomStyleChange(keyName, event.target.value)}>
+                { containerPropsToCustomize[keyName].map((propVal) => (<option key={propVal}>{propVal}</option>)) }
+              </select>
+            </div>
           )
-        })
-      }
+        }) }
+        </div>
+        <div className="item-props">
+        <h4>Flex Item Props</h4>
+        {
+          Object.keys(itemPropsToCustomize).map((keyName) => {
+            const { customItemStyles } = this.state;
+            const itemValue = (customItemStyles[currentItemIndex] && customItemStyles[currentItemIndex][keyName]) || '1 1 auto';
+
+            return (
+            <div key={keyName} className="prop-key-value-pair">
+              <div className="prop-key">{keyName}{`(Item ${this.state.currentItemIndex + 1})`}: </div>
+              <input
+                className="prop-value"
+                value={itemValue}
+                onChange={(event) => this.onItemStyleChange(currentItemIndex, keyName, event.target.value)} />
+            </div>
+            )
+          })
+        }
+      </div>
       </div>
       <FlexBox
         containerStyles={{ ...this.props.containerStyles, ...this.state.customContainerStyles}}
         itemStyles={{ ...this.props.itemStyles, ...this.state.customItemStyles }}
+        itemPropsToDisplay={this.props.itemPropsToDisplay}
         itemCount={this.props.itemCount}
         onItemClick={this.onItemClick}
       />
@@ -84,6 +88,7 @@ FlexBoxCustomizable.propTypes = {
   heading: PropTypes.string,
   containerPropsToCustomize: PropTypes.object,
   itemPropsToCustomize: PropTypes.object,
+  itemPropsToDisplay: PropTypes.string,
   containerStyles: PropTypes.object,
   itemStyles: PropTypes.object,
   itemCount: PropTypes.number,
