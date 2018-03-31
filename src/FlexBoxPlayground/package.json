@@ -1,5 +1,5 @@
 {
-    "name": "FlexBoxPlayground",
-    "private": true,
-    "main": "./FlexBoxPlayground.jsx"
-  }
+  "name": "FlexBoxPlayground",
+  "private": true,
+  "main": "./FlexBoxPlayground.jsx"
+}

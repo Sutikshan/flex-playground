@@ -35,14 +35,14 @@ class FlexBoxPlayground extends Component {
                 </a> */}
               </div>
             </header>
-            <p className="Playground-intro">Please edit flex-box properties to see the effects.</p>
+            <p className="Playground-intro">
+              Please edit flex-box properties to see the effects.
+            </p>
             <Route exact path="/" component={FlexBoxContainer} />
             <Route path="/FlexBoxContainer" component={FlexBoxContainer} />
             <Route path="/Flexibility" component={FlexBoxFlexibility} />
           </div>
-
         </Router>
-        
       </div>
     );
   }

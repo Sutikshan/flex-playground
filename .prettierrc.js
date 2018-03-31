@@ -1,6 +1,6 @@
 // .prettierrc.js
 module.exports = {
-  printWidth: 100,
+  printWidth: 80,
   parser: "babylon",
-  tabWidth: 2,
+  tabWidth: 2
 };
