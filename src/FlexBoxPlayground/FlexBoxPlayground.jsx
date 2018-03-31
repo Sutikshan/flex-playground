@@ -27,12 +27,12 @@ class FlexBoxPlayground extends Component {
                 >
                   Flexibility
                 </Link>
-                <a href="#" className="button button-03">
+                {/* <a href="#" className="button button-03">
                   Alignment
                 </a>
                 <a href="#" className="button button-03">
                   RealWorld
-                </a>
+                </a> */}
               </div>
             </header>
             <p className="Playground-intro">Please edit flex-box properties to see the effects.</p>

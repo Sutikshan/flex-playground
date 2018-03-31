@@ -8,9 +8,6 @@ export default class FlexBoxFlexibility extends Component {
       flexFlow,
     } = FlexBoxConstants.FlexContainerProps;
     const {
-      flexGrow,
-      flexShrink,
-      flexBasis,
       flex,
     } = FlexBoxConstants.FlexItemsProps;
 
@@ -20,7 +17,7 @@ export default class FlexBoxFlexibility extends Component {
           heading="The Flex Items"
           containerPropsToCustomize={{flexFlow}}
           itemPropsToCustomize={{flex}}
-          itemPropsToDisplay={`flex: ${flex}`}
+          itemPropsToDisplay={['flex']}
         />
       </div>
     );

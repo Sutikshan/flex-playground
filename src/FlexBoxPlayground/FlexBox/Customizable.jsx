@@ -7,9 +7,16 @@ export default class FlexBoxCustomizable extends Component {
   constructor(props) {
     super(props);
 
+    let count = 0;
+    let customItemStyles = [];
+    
+    for (; count < props.itemCount; count++) {
+      customItemStyles.push({ ...props.itemPropsToCustomize });
+    }
+
     this.state = {
+      customItemStyles,
       customContainerStyles: {},
-      customItemStyles: [],
       currentItemIndex: 0,
     }
 
@@ -19,12 +26,12 @@ export default class FlexBoxCustomizable extends Component {
       this.setState({ customContainerStyles });
     };
 
-    this.onItemStyleChange = (currentItemIndex, keyName, value) => {
-      const customItemStyles = [...this.state.customItemStyles]; // TODO to fix - this is not complete new copy
-      if (!customItemStyles[currentItemIndex]) {
-        customItemStyles[currentItemIndex] = {};
-      }
-      customItemStyles[currentItemIndex][keyName] = value;
+    this.onItemStyleChange = (currentItemIndex, key, value) => {
+      const customItemStyles = [...this.state.customItemStyles];
+      customItemStyles[currentItemIndex] = {...customItemStyles[currentItemIndex]};
+      customItemStyles[currentItemIndex][key] = {...customItemStyles[currentItemIndex][key]};
+      
+      customItemStyles[currentItemIndex][key].value = value;
       this.setState({ customItemStyles });
     }
 
@@ -58,15 +65,19 @@ export default class FlexBoxCustomizable extends Component {
         {
           Object.keys(itemPropsToCustomize).map((keyName) => {
             const { customItemStyles } = this.state;
-            const itemValue = (customItemStyles[currentItemIndex] && customItemStyles[currentItemIndex][keyName]) || '1 1 auto';
+            const itemValue = (customItemStyles[currentItemIndex] && customItemStyles[currentItemIndex][keyName].value);
+            const itemDesc = (customItemStyles[currentItemIndex] && customItemStyles[currentItemIndex][keyName].description);
 
             return (
             <div key={keyName} className="prop-key-value-pair">
-              <div className="prop-key">{keyName}{`(Item ${this.state.currentItemIndex + 1})`}: </div>
-              <input
-                className="prop-value"
-                value={itemValue}
-                onChange={(event) => this.onItemStyleChange(currentItemIndex, keyName, event.target.value)} />
+              <div className="prop-key">{keyName}{`(Item ${this.state.currentItemIndex})`}: </div>
+              <div className="prop-value">
+                <span>{itemDesc}</span>
+                <input
+                  className="prop-value"
+                  value={itemValue}
+                  onChange={(event) => this.onItemStyleChange(currentItemIndex, keyName, event.target.value)} />
+              </div>
             </div>
             )
           })
@@ -88,7 +99,7 @@ FlexBoxCustomizable.propTypes = {
   heading: PropTypes.string,
   containerPropsToCustomize: PropTypes.object,
   itemPropsToCustomize: PropTypes.object,
-  itemPropsToDisplay: PropTypes.string,
+  itemPropsToDisplay: PropTypes.arrayOf(PropTypes.string),
   containerStyles: PropTypes.object,
   itemStyles: PropTypes.object,
   itemCount: PropTypes.number,

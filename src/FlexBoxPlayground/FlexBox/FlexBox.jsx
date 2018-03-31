@@ -10,16 +10,24 @@ export default class FlexBox extends Component {
     return (
       <div
       style={Object.assign({}, flextStyles.flexContainer, this.props.containerStyles)}>
-        {[...flexItems].splice(0, this.props.itemCount).map((item, index) => {
-          return (
-            <FlexBoxItem
-              onItemClick={this.props.onItemClick}
-              itemIndex={index}
-              itemStyle={Object.assign({}, flextStyles.flexItem(index), this.props.itemStyles[index])}
-              itemPropsToDisplay={this.props.itemPropsToDisplay}
-              />
-          );
-        })}
+        {
+          [...flexItems].splice(0, this.props.itemCount).map((item, index) => {
+            let style = {};
+
+            Object.keys(this.props.itemStyles[index]).forEach(key => {
+              style[key] = this.props.itemStyles[index][key].value;
+            });        
+
+            return (
+              <FlexBoxItem
+                key={index}
+                onItemClick={this.props.onItemClick}
+                itemIndex={index}
+                itemStyle={Object.assign({}, flextStyles.flexItem(index), style)}
+                itemPropsToDisplay={this.props.itemPropsToDisplay}
+                />
+            );
+          })}
       </div>
     );
   }
@@ -28,7 +36,7 @@ export default class FlexBox extends Component {
 FlexBox.propTypes = {
   containerStyles: PropTypes.object,
   itemStyles: PropTypes.object,
-  itemPropsToDisplay: PropTypes.string,
+  itemPropsToDisplay: PropTypes.arrayOf(PropTypes.string),
   itemCount: PropTypes.number,
   onItemClick: PropTypes.func.isRequired,
 };

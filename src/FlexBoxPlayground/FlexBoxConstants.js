@@ -7,8 +7,11 @@ const FlexContainerProps = {
 };
 
 const FlexItemsProps = {
-    flex: '0 0 auto',
-  };
+    flex: {
+        value: '0 0 auto',
+        description: 'flex-grow flex-shrink flex-basis',
+    }
+};
 
 export default {
     FlexContainerProps,

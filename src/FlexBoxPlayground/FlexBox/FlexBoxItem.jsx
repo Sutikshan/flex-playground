@@ -9,7 +9,11 @@ export default class FlexBoxItem extends Component {
   }
 
   render() {
-    const { itemIndex } = this.props;
+    const { itemIndex, itemStyle, itemPropsToDisplay } = this.props;
+    const propLabel = itemPropsToDisplay.reduce((label, propKey) => {
+      return label + `${propKey}: ${itemStyle[propKey]}`;
+    }, '');
+
     return (<div
       key={itemIndex}
       style={this.props.itemStyle}
@@ -17,19 +21,19 @@ export default class FlexBoxItem extends Component {
     >
       <em>Flex Item</em>
       <strong style={flextStyles.flex_item_strong}>{itemIndex}</strong>
-      <div>{this.props.itemPropsToDisplay}</div>
+      <div>{propLabel}</div>
     </div>);
   }
 }
 
 FlexBoxItem.propTypes = {
   itemStyle: PropTypes.object,
-  itemPropsToDisplay: PropTypes.string,
-  flexStyle: PropTypes.object,
+  itemPropsToDisplay: PropTypes.arrayOf(PropTypes.string),
   itemIndex: PropTypes.number.isRequired,
   onItemClick: PropTypes.func.isRequired,
 };
 
 FlexBoxItem.defaultProps = {
   itemStyles: {},
+  itemPropsToDisplay: [],
 };
