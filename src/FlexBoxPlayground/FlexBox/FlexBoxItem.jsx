@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import flextStyles from "./FlexBox.css.js";
+import flextStyles from './FlexBox.css';
 
 export default class FlexBoxItem extends Component {
   constructor(props) {
@@ -10,30 +10,33 @@ export default class FlexBoxItem extends Component {
 
   render() {
     const { itemIndex, itemStyle, itemPropsToDisplay } = this.props;
-    const propLabel = itemPropsToDisplay.reduce((label, propKey) => {
-      return label + `${propKey}: ${itemStyle[propKey]}`;
-    }, '');
+    const propLabel = itemPropsToDisplay.reduce(
+      (label, propKey) => `${label} ${propKey}: ${itemStyle[propKey]}`,
+      ''
+    );
 
-    return (<div
-      key={itemIndex}
-      style={this.props.itemStyle}
-      onClick={this.onItemClick}
-    >
-      <em>Flex Item</em>
-      <strong style={flextStyles.flex_item_strong}>{itemIndex}</strong>
-      <div>{propLabel}</div>
-    </div>);
+    return (
+      <div
+        key={itemIndex}
+        style={this.props.itemStyle}
+        onClick={this.onItemClick}
+      >
+        <em>Flex Item</em>
+        <strong style={flextStyles.flex_item_strong}>{itemIndex}</strong>
+        <div>{propLabel}</div>
+      </div>
+    );
   }
 }
 
 FlexBoxItem.propTypes = {
-  itemStyle: PropTypes.object,
+  itemStyle: PropTypes.object, // eslint-disable-line
   itemPropsToDisplay: PropTypes.arrayOf(PropTypes.string),
   itemIndex: PropTypes.number.isRequired,
   onItemClick: PropTypes.func.isRequired,
 };
 
 FlexBoxItem.defaultProps = {
-  itemStyles: {},
+  itemStyle: {},
   itemPropsToDisplay: [],
 };

@@ -19,7 +19,7 @@
 .Menu-bar {
   display: flex;
   width: 30em;
-  justify-content: space-around;
+  justify-content: flex-end;
 }
 
 .button {
@@ -30,10 +30,10 @@
   display: block;
   font-weight: 100;
   font-size: 1em;
-  margin: 0;
+  margin-right: 0.8em;
   padding: 0.5em 1em;
   text-align: center;
-  flex: 0 1 6em;
+  flex: 0 1 8em;
 }
 
 .Playground-header-intro {
