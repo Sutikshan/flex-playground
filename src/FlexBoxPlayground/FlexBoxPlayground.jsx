@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import FlexBoxContainer from './FlexBoxContainer';
 import FlexBoxFlexibility from './FlexBoxFlexibility';
+import FlexBoxAlignment from './FlexBoxAlignment';
+
 import './FlexBoxPlayground.css';
 
 const FlexBoxPlayground = () => (
@@ -25,9 +27,14 @@ const FlexBoxPlayground = () => (
             >
               Flexibility
             </Link>
-            {/* <a href="#" className="button button-03">
-            Alignment
-          </a>
+            <Link
+              to="/Alignment"
+              className="button button-03"
+              component={FlexBoxAlignment}
+            >
+              Alignment
+            </Link>
+            {/*
           <a href="#" className="button button-03">
             RealWorld
           </a> */}
@@ -39,6 +46,7 @@ const FlexBoxPlayground = () => (
         <Route exact path="/" component={FlexBoxContainer} />
         <Route path="/FlexBoxContainer" component={FlexBoxContainer} />
         <Route path="/Flexibility" component={FlexBoxFlexibility} />
+        <Route path="/Alignment" component={FlexBoxAlignment} />
       </div>
     </Router>
   </div>

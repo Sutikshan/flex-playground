@@ -4,7 +4,16 @@ import flextStyles from './FlexBox.css';
 import FlexBoxItem from './FlexBoxItem';
 import { FlexItemPropTypes } from './FlexBoxTypes';
 
-const flexItems = ['01', '02', '03', '04', '05', '06', '07', '08', '09'];
+const getStylesForItem = (customisedItemStyle) => {
+  const style = {};
+
+  if (customisedItemStyle) {
+    Object.keys(customisedItemStyle).forEach((key) => {
+      style[key] = customisedItemStyle[key].value;
+    });
+  }
+  return style;
+};
 
 const FlexBox = ({
   containerStyles,
@@ -12,27 +21,32 @@ const FlexBox = ({
   itemStyles,
   itemPropsToDisplay,
   onItemClick,
-}) => (
-  <div style={Object.assign({}, flextStyles.flexContainer, containerStyles)}>
-    {[...flexItems].splice(0, itemCount).map((item, index) => {
-      const style = {};
-      if (itemStyles[index]) {
-        Object.keys(itemStyles[index]).forEach((key) => {
-          style[key] = itemStyles[index][key].value;
-        });
-      }
-      return (
-        <FlexBoxItem
-          key={item}
-          onItemClick={onItemClick}
-          itemIndex={index}
-          itemStyle={Object.assign({}, flextStyles.flexItem(index), style)}
-          itemPropsToDisplay={itemPropsToDisplay}
-        />
-      );
-    })}
-  </div>
-);
+}) => {
+  const flexBoxItems = [];
+  let n = 0;
+  console.log(itemCount);
+  while (n < itemCount) {
+    const index = `0${n}`;
+    const style = getStylesForItem(itemStyles[n]);
+
+    flexBoxItems.push(
+      <FlexBoxItem
+        key={index}
+        onItemClick={onItemClick}
+        itemIndex={n}
+        itemStyle={Object.assign({}, flextStyles.getDefaultStyle(n), style)}
+        itemPropsToDisplay={itemPropsToDisplay}
+      />
+    );
+    n += 1;
+  }
+
+  return (
+    <div style={Object.assign({}, flextStyles.flexContainer, containerStyles)}>
+      {flexBoxItems}
+    </div>
+  );
+};
 
 FlexBox.propTypes = {
   containerStyles: PropTypes.object, // eslint-disable-line

@@ -32,11 +32,11 @@ export default {
     { ...flexContainerDefaults }
   ),
 
-  flexItem: (index) =>
+  getDefaultStyle: (index) =>
     Object.assign(
       {},
       { ...flexItemDefaults },
-      { backgroundColor: colors[index] }
+      { backgroundColor: colors[index % 9] }
     ),
 
   flex_item_strong: {

@@ -13,6 +13,16 @@ const FlexContainerProps = {
     'column wrap-reverse',
     'column-reverse wrap-reverse',
   ],
+  justifyContent: [
+    'flex-start',
+    'flex-end',
+    'center',
+    'space-between',
+    'space-around',
+  ],
+  alignItems: ['flex-start', 'flex-end', 'center', 'stretch', 'baseline'],
+  alignContent: ['flex-start', 'flex-end', 'center', 'space-around'],
+  height: ['20em', 'auto', '1em', '5em', '10em', '15em', '25em'],
 };
 
 const FlexItemsProps = {
