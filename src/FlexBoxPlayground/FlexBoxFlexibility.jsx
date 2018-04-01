@@ -5,6 +5,7 @@ import FlexBoxCustomizable from './FlexBox/Customizable';
 const FlexBoxFlexibility = () => {
   const { flexFlow } = FlexBoxConstants.FlexContainerProps;
   const { flex } = FlexBoxConstants.FlexItemsProps;
+
   return (
     <div>
       <FlexBoxCustomizable
