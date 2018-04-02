@@ -4,7 +4,7 @@ import './App.css';
 
 const App = () => (
   <div className="App">
-    <FlexBoxPlayground />
+    <FlexBoxPlayground className="playground" />
   </div>
 );
 

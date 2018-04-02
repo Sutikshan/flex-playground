@@ -11,7 +11,7 @@ const colors = [
 ];
 
 const flexContainerDefaults = {
-  border: 'solid 4px #000',
+  border: 'solid 2px #000',
 };
 
 const flexItemDefaults = {
@@ -19,19 +19,18 @@ const flexItemDefaults = {
   font_size: '1.2em',
   padding: '1em',
   textAlign: 'center',
-  width: '5em',
+  width: '8em',
+  height: '50px',
   opacity: 0.8,
 };
 
 export default {
-  flexContainer: Object.assign(
-    {},
-    {
-      display: 'flex',
-    },
-    { ...flexContainerDefaults }
-  ),
-
+  flexContainer: {
+    display: 'flex',
+    width: '1100px',
+    height: '80px',
+    ...flexContainerDefaults,
+  },
   getDefaultStyle: (index) =>
     Object.assign(
       {},

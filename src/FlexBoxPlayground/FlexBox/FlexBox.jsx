@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import flextStyles from './FlexBox.css';
 import FlexBoxItem from './FlexBoxItem';
-import { FlexItemPropTypes } from './FlexBoxTypes';
+import { FlexItemPropTypes } from '../FlexBoxConstants';
 
 const getStylesForItem = (customisedItemStyle) => {
   const style = {};
@@ -24,7 +24,6 @@ const FlexBox = ({
 }) => {
   const flexBoxItems = [];
   let n = 0;
-  console.log(itemCount);
   while (n < itemCount) {
     const index = `0${n}`;
     const style = getStylesForItem(itemStyles[n]);
@@ -50,7 +49,7 @@ const FlexBox = ({
 
 FlexBox.propTypes = {
   containerStyles: PropTypes.object, // eslint-disable-line
-  itemStyles: PropTypes.shape(FlexItemPropTypes),
+  itemStyles: PropTypes.arrayOf(PropTypes.shape(FlexItemPropTypes)),
   itemPropsToDisplay: PropTypes.arrayOf(PropTypes.string),
   itemCount: PropTypes.number,
   onItemClick: PropTypes.func.isRequired,

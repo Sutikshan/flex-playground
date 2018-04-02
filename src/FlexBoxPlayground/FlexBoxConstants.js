@@ -1,38 +1,139 @@
+import PropTypes from 'prop-types';
+
 const FlexContainerProps = {
-  display: ['flex', 'inline-flex'],
-  flexDirection: ['row', 'row-reverse', 'column', 'column-reverse'],
-  flexWrap: ['nowrap', 'wrap', 'wrap-reverse'],
-  flexFlow: [
-    'row nowrap',
-    'row wrap',
-    'row-reverse wrap',
-    'column wrap',
-    'column-reverse wrap',
-    'row wrap-reverse',
-    'row-reverse wrap-reverse',
-    'column wrap-reverse',
-    'column-reverse wrap-reverse',
-  ],
-  justifyContent: [
-    'flex-start',
-    'flex-end',
-    'center',
-    'space-between',
-    'space-around',
-  ],
-  alignItems: ['flex-start', 'flex-end', 'center', 'stretch', 'baseline'],
-  alignContent: ['flex-start', 'flex-end', 'center', 'space-around'],
-  height: ['20em', 'auto', '1em', '5em', '10em', '15em', '25em'],
+  display: {
+    value: 'flex',
+    label: 'display',
+    toolTipText: 'flex & inline-flex Options make it flex-container',
+    options: ['flex', 'inline-flex'],
+  },
+  flexDirection: {
+    value: 'row',
+    options: ['row', 'row-reverse', 'column', 'column-reverse'],
+    toolTipText:
+      'decides flow direction and flip main-axis & cross axis accordingly',
+    label: 'flex-direction',
+  },
+  flexWrap: {
+    value: 'nowrap',
+    options: ['nowrap', 'wrap', 'wrap-reverse'],
+    toolTipText:
+      'when container, width is less then decide whether to wrap items or not',
+    label: 'flex-wrap',
+  },
+  flexFlow: {
+    value: 'row nowrap',
+    toolTipText: 'decides the flex-direction and flex-wrap in single property',
+    label: 'flex-flow',
+    options: [
+      'row nowrap',
+      'row wrap',
+      'row-reverse wrap',
+      'column nowrap',
+      'column wrap',
+      'column-reverse wrap',
+      'row wrap-reverse',
+      'row-reverse wrap-reverse',
+      'column wrap-reverse',
+      'column-reverse wrap-reverse',
+    ],
+  },
+  justifyContent: {
+    value: 'flex-start',
+    toolTipText:
+      'defines how the browser distributes space between and around content items along the main axis of their container',
+    options: [
+      'flex-start',
+      'flex-end',
+      'center',
+      'space-between',
+      'space-around',
+    ],
+    label: 'justify-content',
+  },
+  alignItems: {
+    label: 'align-items',
+    value: 'stretch',
+    toolTipText:
+      'distributes space between and around flex items along the cross-axis of their container',
+    options: ['stretch', 'flex-start', 'flex-end', 'center', 'baseline'],
+  },
+  alignContent: {
+    label: 'align-content',
+    value: 'normal',
+    toolTipText:
+      'distributes space between and around content items along the cross-axis of their container. NO effect on single line boxes.',
+    options: ['normal', 'flex-start', 'flex-end', 'center', 'space-around'],
+  },
+  height: {
+    label: 'height',
+    value: '100px',
+    toolTipText: 'change the height of flex-Container',
+    options: ['100px', '200px', '300px', '400px', '500px', '600px', '800px'],
+  },
+  width: {
+    label: 'width',
+    value: '100px',
+    toolTipText: 'change the width of flex-Container',
+    options: ['100px', '200px', '300px', '400px', '500px', '600px', '800px'],
+  },
 };
 
 const FlexItemsProps = {
   flex: {
     value: '0 0 auto',
-    description: 'flex-grow flex-shrink flex-basis',
+    label: 'flex-grow flex-shrink flex-basis',
   },
+  alignSelf: {
+    label: 'align-self',
+    value: 'normal',
+    toolTipText:
+      'The align-self CSS property aligns flex items of the current flex line overriding the align-items value. If any of the items cross-axis margin is set to auto, then align-self is ignored.',
+    options: ['flex-start', 'flex-end', 'center'],
+  },
+  height: {
+    label: 'height',
+    value: '100px',
+    toolTipText: 'change the height of flex-Container',
+    options: ['100px', '200px', '300px', '400px', '500px', '600px', '800px'],
+  },
+  width: {
+    label: 'width',
+    value: '100px',
+    toolTipText: 'change the width of flex-Container',
+    options: ['100px', '200px', '300px', '400px', '500px', '600px', '800px'],
+  },
+};
+
+const FlexPropType = {
+  value: PropTypes.string,
+  label: PropTypes.string,
+  toolTipText: PropTypes.string,
+};
+
+const FlexContainerPropType = {
+  ...FlexPropType,
+  options: PropTypes.arrayOf(PropTypes.string),
+};
+
+export const FlexContainerPropTypes = {
+  display: PropTypes.shape(FlexContainerPropType),
+  flexDirection: PropTypes.shape(FlexContainerPropType),
+  flexWrap: PropTypes.shape(FlexContainerPropType),
+  flexFlow: PropTypes.shape(FlexContainerPropType),
+  justifyContent: PropTypes.shape(FlexContainerPropType),
+  alignContent: PropTypes.shape(FlexContainerPropType),
+  alignItems: PropTypes.shape(FlexContainerPropType),
+  height: PropTypes.shape(FlexContainerPropType),
+};
+
+export const FlexItemPropTypes = {
+  flex: PropTypes.shape(FlexPropType),
 };
 
 export default {
   FlexContainerProps,
   FlexItemsProps,
+  FlexContainerPropTypes,
+  FlexItemPropTypes,
 };

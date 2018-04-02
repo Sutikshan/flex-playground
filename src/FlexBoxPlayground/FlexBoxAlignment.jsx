@@ -8,9 +8,10 @@ const FlexBoxAlignment = () => {
     justifyContent,
     alignItems,
     alignContent,
-    height,
+    width: containerWidth,
+    height: containerHeight,
   } = FlexBoxConstants.FlexContainerProps;
-  const { flex } = FlexBoxConstants.FlexItemsProps;
+  const { flex, width, height } = FlexBoxConstants.FlexItemsProps;
 
   return (
     <div>
@@ -23,9 +24,8 @@ const FlexBoxAlignment = () => {
       <FlexBoxCustomizable
         heading="Align Items across Cross Axis"
         containerPropsToCustomize={{
-          flexFlow,
           alignItems,
-          height,
+          height: containerHeight,
         }}
         itemPropsToCustomize={{ flex }}
         itemPropsToDisplay={['flex']}
@@ -33,14 +33,12 @@ const FlexBoxAlignment = () => {
       <FlexBoxCustomizable
         heading="Align Content across Cross Axis"
         containerPropsToCustomize={{
-          flexFlow,
-          alignItems,
           alignContent,
-          height,
+          height: containerHeight,
         }}
         itemPropsToCustomize={{ flex }}
         itemPropsToDisplay={['flex']}
-        itemCount={20}
+        itemCount={9}
       />
       <FlexBoxCustomizable
         heading="All Together"
@@ -49,11 +47,12 @@ const FlexBoxAlignment = () => {
           justifyContent,
           alignItems,
           alignContent,
-          height,
+          width: containerWidth,
+          height: containerHeight,
         }}
-        itemPropsToCustomize={{ flex }}
+        itemPropsToCustomize={{ flex, width, height }}
         itemPropsToDisplay={['flex']}
-        itemCount={20}
+        itemCount={9}
       />
     </div>
   );

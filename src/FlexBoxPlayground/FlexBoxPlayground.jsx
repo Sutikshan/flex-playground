@@ -11,7 +11,7 @@ const FlexBoxPlayground = () => (
     <Router>
       <div>
         <header className="Playground-header">
-          <h1 className="Playground-title">Welcome to Flex Playground</h1>
+          <h1 className="Playground-title">Flex Playground</h1>
           <div className="Menu-bar">
             <Link
               to="/FlexBoxContainer"
@@ -40,9 +40,6 @@ const FlexBoxPlayground = () => (
           </a> */}
           </div>
         </header>
-        <p className="Playground-intro">
-          Please edit flex-box properties to see the effects.
-        </p>
         <Route exact path="/" component={FlexBoxContainer} />
         <Route path="/FlexBoxContainer" component={FlexBoxContainer} />
         <Route path="/Flexibility" component={FlexBoxFlexibility} />

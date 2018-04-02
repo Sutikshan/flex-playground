@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FlexBox from './FlexBox';
-import { FlexContainerPropTypes, FlexItemPropTypes } from './FlexBoxTypes';
+import { FlexContainerPropTypes, FlexItemPropTypes } from '../FlexBoxConstants';
 import './Customizable.css';
 
 export default class FlexBoxCustomizable extends Component {
@@ -55,14 +55,16 @@ export default class FlexBoxCustomizable extends Component {
     const { currentItemIndex } = this.state;
 
     return (
-      <div>
+      <div className="play-area">
         <h4>{heading}</h4>
         <div className="property-section">
           <div className="containe-props">
-            <h4>Flex Container Props</h4>
+            <h4>Container Props</h4>
             {Object.keys(containerPropsToCustomize).map((keyName) => (
               <div key={keyName} className="prop-key-value-pair">
-                <div className="prop-key">{keyName}: </div>
+                <div className="prop-key">
+                  {containerPropsToCustomize[keyName].label}:{' '}
+                </div>
 
                 <select
                   className="prop-value"
@@ -70,7 +72,7 @@ export default class FlexBoxCustomizable extends Component {
                     this.onCustomStyleChange(keyName, event.target.value)
                   }
                 >
-                  {containerPropsToCustomize[keyName].map((propVal) => (
+                  {containerPropsToCustomize[keyName].options.map((propVal) => (
                     <option key={propVal}>{propVal}</option>
                   ))}
                 </select>
@@ -78,7 +80,7 @@ export default class FlexBoxCustomizable extends Component {
             ))}
           </div>
           <div className="item-props">
-            <h4>Flex Item Props</h4>
+            <h4>Item Props</h4>
             {Object.keys(itemPropsToCustomize).map((keyName) => {
               const { customItemStyles } = this.state;
               const itemValue =
@@ -86,7 +88,7 @@ export default class FlexBoxCustomizable extends Component {
                 customItemStyles[currentItemIndex][keyName].value;
               const itemDesc =
                 customItemStyles[currentItemIndex] &&
-                customItemStyles[currentItemIndex][keyName].description;
+                customItemStyles[currentItemIndex][keyName].label;
 
               return (
                 <div key={keyName} className="prop-key-value-pair">
@@ -114,14 +116,8 @@ export default class FlexBoxCustomizable extends Component {
           </div>
         </div>
         <FlexBox
-          containerStyles={{
-            ...this.props.containerStyles,
-            ...this.state.customContainerStyles,
-          }}
-          itemStyles={{
-            ...this.props.itemStyles,
-            ...this.state.customItemStyles,
-          }}
+          containerStyles={this.state.customContainerStyles}
+          itemStyles={this.state.customItemStyles}
           itemPropsToDisplay={this.props.itemPropsToDisplay}
           itemCount={this.props.itemCount}
           onItemClick={this.onItemClick}
@@ -136,8 +132,6 @@ FlexBoxCustomizable.propTypes = {
   containerPropsToCustomize: PropTypes.shape(FlexContainerPropTypes),
   itemPropsToCustomize: PropTypes.shape(FlexItemPropTypes),
   itemPropsToDisplay: PropTypes.arrayOf(PropTypes.string),
-  containerStyles: PropTypes.object, // eslint-disable-line
-  itemStyles: PropTypes.object, // eslint-disable-line
   itemCount: PropTypes.number,
 };
 
@@ -146,7 +140,5 @@ FlexBoxCustomizable.defaultProps = {
   containerPropsToCustomize: {},
   itemPropsToDisplay: [],
   itemPropsToCustomize: {},
-  containerStyles: {},
-  itemStyles: {},
   itemCount: 4,
 };
