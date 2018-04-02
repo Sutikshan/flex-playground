@@ -27,7 +27,7 @@ export default class FlexBoxCustomizable extends Component {
       this.setState({ customContainerStyles });
     };
 
-    this.onItemStyleChange = (currentItemIndex, key, value) => {
+    this.onItemStyleChange = (key, value, currentItemIndex) => {
       const customItemStylesArray = [...this.state.customItemStyles];
       customItemStylesArray[currentItemIndex] = {
         ...customItemStylesArray[currentItemIndex],
@@ -43,6 +43,52 @@ export default class FlexBoxCustomizable extends Component {
     this.onItemClick = (index) => {
       this.setState({ currentItemIndex: index });
     };
+
+    this.renderPropDropDown = (
+      keyName,
+      propToCustomize,
+      onChange,
+      index,
+      value
+    ) => (
+      <div key={keyName} className="prop-key-value-pair">
+        <div className="prop-key">{propToCustomize.label}: </div>
+
+        <select
+          className="prop-value"
+          onChange={(event) => onChange(keyName, event.target.value, index)}
+        >
+          {propToCustomize.options.map((propVal) => (
+            <option key={propVal} selected={propVal === value}>
+              {propVal}
+            </option>
+          ))}
+        </select>
+      </div>
+    );
+
+    this.renderInputBox = (keyName, itemDesc, itemValue, currentItemIndex) => (
+      <div key={keyName} className="prop-key-value-pair">
+        <div className="prop-key">
+          {keyName}
+          {`(Item ${this.state.currentItemIndex})`}:{' '}
+        </div>
+        <div className="prop-value">
+          <span>{itemDesc}</span>
+          <input
+            className="prop-value"
+            value={itemValue}
+            onChange={(event) =>
+              this.onItemStyleChange(
+                keyName,
+                event.target.value,
+                currentItemIndex
+              )
+            }
+          />
+        </div>
+      </div>
+    );
   }
 
   render() {
@@ -52,66 +98,44 @@ export default class FlexBoxCustomizable extends Component {
       itemPropsToCustomize,
     } = this.props;
 
-    const { currentItemIndex } = this.state;
-
     return (
       <div className="play-area">
         <h4>{heading}</h4>
         <div className="property-section">
           <div className="containe-props">
             <h4>Container Props</h4>
-            {Object.keys(containerPropsToCustomize).map((keyName) => (
-              <div key={keyName} className="prop-key-value-pair">
-                <div className="prop-key">
-                  {containerPropsToCustomize[keyName].label}:{' '}
-                </div>
-
-                <select
-                  className="prop-value"
-                  onChange={(event) =>
-                    this.onCustomStyleChange(keyName, event.target.value)
-                  }
-                >
-                  {containerPropsToCustomize[keyName].options.map((propVal) => (
-                    <option key={propVal}>{propVal}</option>
-                  ))}
-                </select>
-              </div>
-            ))}
+            {Object.keys(containerPropsToCustomize).map((keyName) =>
+              this.renderPropDropDown(
+                keyName,
+                containerPropsToCustomize[keyName],
+                this.onCustomStyleChange
+              )
+            )}
           </div>
           <div className="item-props">
             <h4>Item Props</h4>
             {Object.keys(itemPropsToCustomize).map((keyName) => {
-              const { customItemStyles } = this.state;
+              const { customItemStyles, currentItemIndex } = this.state;
+              const currentItemStyle = customItemStyles[currentItemIndex];
               const itemValue =
-                customItemStyles[currentItemIndex] &&
-                customItemStyles[currentItemIndex][keyName].value;
+                currentItemStyle && currentItemStyle[keyName].value;
               const itemDesc =
-                customItemStyles[currentItemIndex] &&
-                customItemStyles[currentItemIndex][keyName].label;
+                currentItemStyle && currentItemStyle[keyName].label;
 
-              return (
-                <div key={keyName} className="prop-key-value-pair">
-                  <div className="prop-key">
-                    {keyName}
-                    {`(Item ${this.state.currentItemIndex})`}:{' '}
-                  </div>
-                  <div className="prop-value">
-                    <span>{itemDesc}</span>
-                    <input
-                      className="prop-value"
-                      value={itemValue}
-                      onChange={(event) =>
-                        this.onItemStyleChange(
-                          currentItemIndex,
-                          keyName,
-                          event.target.value
-                        )
-                      }
-                    />
-                  </div>
-                </div>
-              );
+              return currentItemStyle[keyName].options
+                ? this.renderPropDropDown(
+                    keyName,
+                    currentItemStyle[keyName],
+                    this.onItemStyleChange,
+                    currentItemIndex,
+                    itemValue
+                  )
+                : this.renderInputBox(
+                    keyName,
+                    itemDesc,
+                    itemValue,
+                    currentItemIndex
+                  );
             })}
           </div>
         </div>
