@@ -1,7 +1,8 @@
 {
   "name": "flex-playground",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "homepage": "http://sutikshan.github.io/flex-playground",
   "dependencies": {
     "autoprefixer": "7.1.6",
     "babel-core": "6.26.0",
@@ -50,7 +51,9 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "lint-staged": {
     "*.{js,json,css,md}": ["prettier --write", "git add"]
@@ -58,6 +61,7 @@
   "devDependencies": {
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.9.0",
+    "gh-pages": "^1.1.0",
     "husky": "^0.14.3",
     "jest-cli": "^22.4.3",
     "lint-staged": "^7.0.1",
