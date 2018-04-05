@@ -41,6 +41,7 @@ const FlexBoxPlayground = () => (
           </div>
         </header>
         <Route exact path="/" component={FlexBoxContainer} />
+        <Route exact path="/flex-playground" component={FlexBoxContainer} />
         <Route path="/FlexBoxContainer" component={FlexBoxContainer} />
         <Route path="/Flexibility" component={FlexBoxFlexibility} />
         <Route path="/Alignment" component={FlexBoxAlignment} />
