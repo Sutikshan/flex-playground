@@ -27,7 +27,6 @@ const flexItemDefaults = {
 export default {
   flexContainer: {
     display: 'flex',
-    height: '80px',
     ...flexContainerDefaults,
   },
   getDefaultStyle: (index) =>

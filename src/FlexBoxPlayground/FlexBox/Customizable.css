@@ -1,7 +1,9 @@
 .property-section {
   display: flex;
   justify-content: space-between;
-  padding-bottom: 1em;
+  padding: 2px 4px;
+  background: #f5f7f9;
+  border-left: 2px solid #69c;
 }
 .containe-props {
   text-align: left;
@@ -14,9 +16,7 @@
 .prop-key-value-pair {
   display: flex;
   width: 100%;
-  padding: 3px;
   justify-content: space-between;
-  font-family: 'Courier New', Courier, monospace;
 }
 .prop-key-value-pair > .prop-key {
   width: 180px;
@@ -27,4 +27,9 @@
   text-align: left;
   flex-basis: 60%;
   margin-bottom: 0.5em;
+}
+
+.flex-box {
+  padding-top: 1em;
+  background: #f5f7f9;
 }

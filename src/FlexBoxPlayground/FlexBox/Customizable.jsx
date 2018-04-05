@@ -103,49 +103,55 @@ export default class FlexBoxCustomizable extends Component {
         <h4>{heading}</h4>
         <div className="property-section">
           <div className="containe-props">
-            <h4>Container Props</h4>
-            {Object.keys(containerPropsToCustomize).map((keyName) =>
-              this.renderPropDropDown(
-                keyName,
-                containerPropsToCustomize[keyName],
-                this.onCustomStyleChange
-              )
-            )}
+            <code>
+              {Object.keys(containerPropsToCustomize).map((keyName) =>
+                this.renderPropDropDown(
+                  keyName,
+                  containerPropsToCustomize[keyName],
+                  this.onCustomStyleChange
+                )
+              )}
+            </code>
           </div>
-          <div className="item-props">
-            <h4>Item Props</h4>
-            {Object.keys(itemPropsToCustomize).map((keyName) => {
-              const { customItemStyles, currentItemIndex } = this.state;
-              const currentItemStyle = customItemStyles[currentItemIndex];
-              const itemValue =
-                currentItemStyle && currentItemStyle[keyName].value;
-              const itemDesc =
-                currentItemStyle && currentItemStyle[keyName].label;
+          { itemPropsToCustomize ?
+            (<div className="item-props">
+              <code>
+                {Object.keys(itemPropsToCustomize).map((keyName) => {
+                  const { customItemStyles, currentItemIndex } = this.state;
+                  const currentItemStyle = customItemStyles[currentItemIndex];
+                  const itemValue =
+                    currentItemStyle && currentItemStyle[keyName].value;
+                  const itemDesc =
+                    currentItemStyle && currentItemStyle[keyName].label;
 
-              return currentItemStyle[keyName].options
-                ? this.renderPropDropDown(
-                    keyName,
-                    currentItemStyle[keyName],
-                    this.onItemStyleChange,
-                    currentItemIndex,
-                    itemValue
-                  )
-                : this.renderInputBox(
-                    keyName,
-                    itemDesc,
-                    itemValue,
-                    currentItemIndex
-                  );
-            })}
-          </div>
+                  return currentItemStyle[keyName].options
+                    ? this.renderPropDropDown(
+                        keyName,
+                        currentItemStyle[keyName],
+                        this.onItemStyleChange,
+                        currentItemIndex,
+                        itemValue
+                      )
+                    : this.renderInputBox(
+                        keyName,
+                        itemDesc,
+                        itemValue,
+                        currentItemIndex
+                      );
+                })}
+              </code>
+             </div>) : null // eslint-disable-line
+            }
         </div>
-        <FlexBox
-          containerStyles={this.state.customContainerStyles}
-          itemStyles={this.state.customItemStyles}
-          itemPropsToDisplay={this.props.itemPropsToDisplay}
-          itemCount={this.props.itemCount}
-          onItemClick={this.onItemClick}
-        />
+        <div className="flex-box">
+          <FlexBox
+            containerStyles={this.state.customContainerStyles}
+            itemStyles={this.state.customItemStyles}
+            itemPropsToDisplay={this.props.itemPropsToDisplay}
+            itemCount={this.props.itemCount}
+            onItemClick={this.onItemClick}
+          />
+        </div>
       </div>
     );
   }
@@ -163,6 +169,6 @@ FlexBoxCustomizable.defaultProps = {
   heading: '',
   containerPropsToCustomize: {},
   itemPropsToDisplay: [],
-  itemPropsToCustomize: {},
+  itemPropsToCustomize: null,
   itemCount: 4,
 };
