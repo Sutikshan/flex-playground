@@ -5,7 +5,7 @@ import FlexBoxFlexibility from './FlexBoxFlexibility';
 import FlexBoxAlignment from './FlexBoxAlignment';
 import './FlexBoxPlayground.css';
 
-const BASE_PATH = 'flexbox-playground';
+const BASE_PATH = 'flex-playground';
 
 const FlexBoxPlayground = () => (
   <div className="Playground">
@@ -42,7 +42,7 @@ const FlexBoxPlayground = () => (
           </div>
         </header>
         <Route exact path="/" component={FlexBoxContainer} />
-        <Route exact path="/flex-playground" component={FlexBoxContainer} />
+        <Route exact path={`/${BASE_PATH}`} component={FlexBoxContainer} />
         <Route path={`/${BASE_PATH}/FlexBoxContainer`} component={FlexBoxContainer} />
         <Route path={`/${BASE_PATH}/Flexibility`} component={FlexBoxFlexibility} />
         <Route path={`/${BASE_PATH}/Alignment`} component={FlexBoxAlignment} />
