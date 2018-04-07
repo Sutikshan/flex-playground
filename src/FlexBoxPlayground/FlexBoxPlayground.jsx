@@ -19,7 +19,7 @@ const FlexBoxPlayground = () => (
               component={FlexBoxContainer}
               className="button button-01"
             >
-              FlexContainer
+              Flow
             </Link>
             <Link
               to={`/${BASE_PATH}/Flexibility`}
@@ -43,9 +43,19 @@ const FlexBoxPlayground = () => (
         </header>
         <Route exact path="/" component={FlexBoxContainer} />
         <Route exact path={`/${BASE_PATH}`} component={FlexBoxContainer} />
-        <Route path={`/${BASE_PATH}/FlexBoxContainer`} component={FlexBoxContainer} />
-        <Route path={`/${BASE_PATH}/Flexibility`} component={FlexBoxFlexibility} />
+        <Route
+          path={`/${BASE_PATH}/FlexBoxContainer`}
+          component={FlexBoxContainer}
+        />
+        <Route
+          path={`/${BASE_PATH}/Flexibility`}
+          component={FlexBoxFlexibility}
+        />
         <Route path={`/${BASE_PATH}/Alignment`} component={FlexBoxAlignment} />
+        <Route
+          path={`/${BASE_PATH}/Alltogether`}
+          component={FlexBoxAlignment}
+        />
       </div>
     </Router>
   </div>

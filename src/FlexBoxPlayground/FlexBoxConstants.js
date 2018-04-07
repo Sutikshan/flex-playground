@@ -1,5 +1,26 @@
 import PropTypes from 'prop-types';
 
+const widthOptions = [
+  'auto',
+  '100px',
+  '200px',
+  '300px',
+  '400px',
+  '500px',
+  '600px',
+  '800px',
+];
+const heightOptions = [
+  'auto',
+  '100px',
+  '200px',
+  '300px',
+  '400px',
+  '500px',
+  '600px',
+  '800px',
+];
+
 const FlexContainerProps = {
   display: {
     value: 'flex',
@@ -66,16 +87,16 @@ const FlexContainerProps = {
     options: ['normal', 'flex-start', 'flex-end', 'center', 'space-around'],
   },
   height: {
-    label: 'height',
+    label: 'container height',
     value: '100px',
     toolTipText: 'change the height of flex-Container',
-    options: ['100px', '200px', '300px', '400px', '500px', '600px', '800px'],
+    options: heightOptions,
   },
   width: {
-    label: 'width',
+    label: 'container width',
     value: '100px',
     toolTipText: 'change the width of flex-Container',
-    options: ['100px', '200px', '300px', '400px', '500px', '600px', '800px'],
+    options: widthOptions,
   },
 };
 
@@ -83,6 +104,10 @@ const FlexItemsProps = {
   flex: {
     value: '0 0 auto',
     label: 'flex-grow flex-shrink flex-basis',
+  },
+  order: {
+    value: '0',
+    label: '',
   },
   alignSelf: {
     label: 'align-self',
@@ -92,16 +117,18 @@ const FlexItemsProps = {
     options: ['flex-start', 'flex-end', 'center'],
   },
   height: {
-    label: 'height',
-    value: '100px',
+    label: 'item height (all)',
+    value: 'auto',
     toolTipText: 'change the height of flex-Container',
-    options: ['100px', '200px', '300px', '400px', '500px', '600px', '800px'],
+    options: heightOptions,
+    appliesToAll: true,
   },
   width: {
-    label: 'width',
-    value: '100px',
+    label: 'item width (all)',
+    value: 'auto',
     toolTipText: 'change the width of flex-Container',
-    options: ['100px', '200px', '300px', '400px', '500px', '600px', '800px'],
+    options: widthOptions,
+    appliesToAll: true,
   },
 };
 
@@ -116,7 +143,7 @@ const FlexContainerPropType = {
   options: PropTypes.arrayOf(PropTypes.string),
 };
 
-export const FlexContainerPropTypes = {
+const FlexContainerPropTypes = {
   display: PropTypes.shape(FlexContainerPropType),
   flexDirection: PropTypes.shape(FlexContainerPropType),
   flexWrap: PropTypes.shape(FlexContainerPropType),
@@ -127,11 +154,22 @@ export const FlexContainerPropTypes = {
   height: PropTypes.shape(FlexContainerPropType),
 };
 
-export const FlexItemPropTypes = {
+const FlexItemPropTypes = {
   flex: PropTypes.shape(FlexPropType),
 };
 
+const DefaultContainerProps = {
+  width: FlexContainerProps.width,
+  height: FlexContainerProps.height,
+};
+const DefaultItemProps = {
+  width: FlexItemsProps.width,
+  height: FlexItemsProps.height,
+};
+
 export default {
+  DefaultContainerProps,
+  DefaultItemProps,
   FlexContainerProps,
   FlexItemsProps,
   FlexContainerPropTypes,

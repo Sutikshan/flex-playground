@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FlexBox from './FlexBox';
-import { FlexContainerPropTypes, FlexItemPropTypes } from '../FlexBoxConstants';
+import FlexBoxConstants from '../FlexBoxConstants';
 import './Customizable.css';
 
 export default class FlexBoxCustomizable extends Component {
@@ -12,13 +12,21 @@ export default class FlexBoxCustomizable extends Component {
     const customItemStyles = [];
 
     for (; count < props.itemCount; count += 1) {
-      customItemStyles.push({ ...props.itemPropsToCustomize });
+      customItemStyles.push({
+        ...props.itemPropsToCustomize,
+        ...FlexBoxConstants.DefaultItemProps,
+      });
     }
 
     this.state = {
       customItemStyles,
       customContainerStyles: {},
       currentItemIndex: 0,
+      itemCount: props.itemCount,
+    };
+
+    this.onItemCountChange = (event) => {
+      this.setState({ itemCount: parseInt(event.target.value, 10) });
     };
 
     this.onCustomStyleChange = (keyName, value) => {
@@ -28,15 +36,24 @@ export default class FlexBoxCustomizable extends Component {
     };
 
     this.onItemStyleChange = (key, value, currentItemIndex) => {
+      let startIndex = currentItemIndex;
+      let endIndex = currentItemIndex + 1;
       const customItemStylesArray = [...this.state.customItemStyles];
-      customItemStylesArray[currentItemIndex] = {
-        ...customItemStylesArray[currentItemIndex],
-      };
-      customItemStylesArray[currentItemIndex][key] = {
-        ...customItemStylesArray[currentItemIndex][key],
-      };
+      if (customItemStylesArray[currentItemIndex][key].appliesToAll) {
+        startIndex = 0;
+        endIndex = customItemStylesArray.length;
+      }
+      for (let i = startIndex; i < endIndex; i += 1) {
+        customItemStylesArray[i] = {
+          ...customItemStylesArray[i],
+        };
 
-      customItemStylesArray[currentItemIndex][key].value = value;
+        customItemStylesArray[i][key] = {
+          ...customItemStylesArray[i][key],
+        };
+
+        customItemStylesArray[i][key].value = value;
+      }
       this.setState({ customItemStyles: customItemStylesArray });
     };
 
@@ -57,11 +74,10 @@ export default class FlexBoxCustomizable extends Component {
         <select
           className="prop-value"
           onChange={(event) => onChange(keyName, event.target.value, index)}
+          value={value}
         >
           {propToCustomize.options.map((propVal) => (
-            <option key={propVal} selected={propVal === value}>
-              {propVal}
-            </option>
+            <option key={propVal}>{propVal}</option>
           ))}
         </select>
       </div>
@@ -98,25 +114,47 @@ export default class FlexBoxCustomizable extends Component {
       itemPropsToCustomize,
     } = this.props;
 
+    const allContainerPropsToCustomize = {
+      width: FlexBoxConstants.FlexContainerProps.width,
+      height: FlexBoxConstants.FlexContainerProps.height,
+      ...containerPropsToCustomize,
+    };
+
+    const allItemPropsToCustomize = {
+      width: FlexBoxConstants.FlexItemsProps.width,
+      height: FlexBoxConstants.FlexItemsProps.height,
+      ...itemPropsToCustomize,
+    };
+
     return (
       <div className="play-area">
-        <h4>{heading}</h4>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <h4>{heading}</h4>
+          <h4>
+            Item Count{' '}
+            <input
+              type="number"
+              value={this.state.itemCount}
+              onChange={this.onItemCountChange}
+            />
+          </h4>
+        </div>
         <div className="property-section">
           <div className="containe-props">
             <code>
-              {Object.keys(containerPropsToCustomize).map((keyName) =>
+              {Object.keys(allContainerPropsToCustomize).map((keyName) =>
                 this.renderPropDropDown(
                   keyName,
-                  containerPropsToCustomize[keyName],
+                  allContainerPropsToCustomize[keyName],
                   this.onCustomStyleChange
                 )
               )}
             </code>
           </div>
-          { itemPropsToCustomize ?
-            (<div className="item-props">
+          {allItemPropsToCustomize ? (
+            <div className="item-props">
               <code>
-                {Object.keys(itemPropsToCustomize).map((keyName) => {
+                {Object.keys(allItemPropsToCustomize).map((keyName) => {
                   const { customItemStyles, currentItemIndex } = this.state;
                   const currentItemStyle = customItemStyles[currentItemIndex];
                   const itemValue =
@@ -140,15 +178,16 @@ export default class FlexBoxCustomizable extends Component {
                       );
                 })}
               </code>
-             </div>) : null // eslint-disable-line
-            }
+            </div>
+          ) : null // eslint-disable-line
+          }
         </div>
         <div className="flex-box">
           <FlexBox
             containerStyles={this.state.customContainerStyles}
             itemStyles={this.state.customItemStyles}
             itemPropsToDisplay={this.props.itemPropsToDisplay}
-            itemCount={this.props.itemCount}
+            itemCount={this.state.itemCount}
             onItemClick={this.onItemClick}
           />
         </div>
@@ -159,8 +198,10 @@ export default class FlexBoxCustomizable extends Component {
 
 FlexBoxCustomizable.propTypes = {
   heading: PropTypes.string,
-  containerPropsToCustomize: PropTypes.shape(FlexContainerPropTypes),
-  itemPropsToCustomize: PropTypes.shape(FlexItemPropTypes),
+  containerPropsToCustomize: PropTypes.shape(
+    FlexBoxConstants.FlexContainerPropTypes
+  ),
+  itemPropsToCustomize: PropTypes.shape(FlexBoxConstants.FlexItemPropTypes),
   itemPropsToDisplay: PropTypes.arrayOf(PropTypes.string),
   itemCount: PropTypes.number,
 };
@@ -169,6 +210,6 @@ FlexBoxCustomizable.defaultProps = {
   heading: '',
   containerPropsToCustomize: {},
   itemPropsToDisplay: [],
-  itemPropsToCustomize: null,
+  itemPropsToCustomize: {},
   itemCount: 4,
 };

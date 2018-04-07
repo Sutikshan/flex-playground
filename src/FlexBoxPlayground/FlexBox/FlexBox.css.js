@@ -19,8 +19,6 @@ const flexItemDefaults = {
   font_size: '1.2em',
   padding: '1em',
   textAlign: 'center',
-  width: '8em',
-  height: '50px',
   opacity: 0.8,
 };
 

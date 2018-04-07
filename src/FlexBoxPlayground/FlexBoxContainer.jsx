@@ -10,23 +10,27 @@ const FlexBoxContainer = () => {
     flexFlow,
   } = FlexBoxConstants.FlexContainerProps;
 
+  const { order } = FlexBoxConstants.FlexItemsProps;
+
   return (
     <div>
       <FlexBoxCustomizable
-        heading="The Flex Container"
+        heading="The Container"
         containerPropsToCustomize={{ display }}
       />
       <FlexBoxCustomizable
-        heading="Flex Flow Direction: flex-direction"
+        heading="Direction & Order"
         containerPropsToCustomize={{ display, flexDirection }}
+        itemPropsToCustomize={{ order }}
+        itemPropsToDisplay={['order']}
       />
       <FlexBoxCustomizable
-        heading="Flex Line Wrapping: flex-wrap"
+        heading="Wrapping:"
         containerPropsToCustomize={{ display, flexDirection, flexWrap }}
         itemCount={9}
       />
       <FlexBoxCustomizable
-        heading="Flex Direction + Line Wrapping: flex-flow"
+        heading="flex-flow = Direction + Wrapping"
         containerPropsToCustomize={{ display, flexFlow }}
         itemCount={9}
       />
