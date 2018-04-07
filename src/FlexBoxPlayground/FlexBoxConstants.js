@@ -45,6 +45,7 @@ const FlexContainerProps = {
   flexFlow: {
     value: 'row nowrap',
     toolTipText: 'decides the flex-direction and flex-wrap in single property',
+    abbreviation: 'flex-direction flex-wrap',
     label: 'flex-flow',
     options: [
       'row nowrap',
@@ -103,7 +104,7 @@ const FlexContainerProps = {
 const FlexItemsProps = {
   flex: {
     value: '0 0 auto',
-    label: 'flex-grow flex-shrink flex-basis',
+    abbreviation: 'flex-grow flex-shrink flex-basis',
   },
   order: {
     value: '0',

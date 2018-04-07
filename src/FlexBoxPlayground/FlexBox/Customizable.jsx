@@ -66,33 +66,40 @@ export default class FlexBoxCustomizable extends Component {
       propToCustomize,
       onChange,
       index,
-      value
+      value,
+      abbreviation
     ) => (
       <div key={keyName} className="prop-key-value-pair">
         <div className="prop-key">{propToCustomize.label}: </div>
-
-        <select
-          className="prop-value"
-          onChange={(event) => onChange(keyName, event.target.value, index)}
-          value={value}
-        >
-          {propToCustomize.options.map((propVal) => (
-            <option key={propVal}>{propVal}</option>
-          ))}
-        </select>
+        <div className="prop-value">
+          <div>{abbreviation}</div>
+          <select
+            className="prop-value"
+            onChange={(event) => onChange(keyName, event.target.value, index)}
+            value={value}
+          >
+            {propToCustomize.options.map((propVal) => (
+              <option key={propVal}>{propVal}</option>
+            ))}
+          </select>
+        </div>
       </div>
     );
 
-    this.renderInputBox = (keyName, itemDesc, itemValue, currentItemIndex) => (
+    this.renderInputBox = (
+      keyName,
+      abbreviation,
+      itemValue,
+      currentItemIndex
+    ) => (
       <div key={keyName} className="prop-key-value-pair">
         <div className="prop-key">
           {keyName}
           {`(Item ${this.state.currentItemIndex})`}:{' '}
         </div>
         <div className="prop-value">
-          <span>{itemDesc}</span>
+          <div>{abbreviation}</div>
           <input
-            className="prop-value"
             value={itemValue}
             onChange={(event) =>
               this.onItemStyleChange(
@@ -146,7 +153,10 @@ export default class FlexBoxCustomizable extends Component {
                 this.renderPropDropDown(
                   keyName,
                   allContainerPropsToCustomize[keyName],
-                  this.onCustomStyleChange
+                  this.onCustomStyleChange,
+                  0,
+                  allContainerPropsToCustomize[keyName].value,
+                  allContainerPropsToCustomize[keyName].abbreviation
                 )
               )}
             </code>
@@ -159,8 +169,8 @@ export default class FlexBoxCustomizable extends Component {
                   const currentItemStyle = customItemStyles[currentItemIndex];
                   const itemValue =
                     currentItemStyle && currentItemStyle[keyName].value;
-                  const itemDesc =
-                    currentItemStyle && currentItemStyle[keyName].label;
+                  const abbreviation =
+                    currentItemStyle && currentItemStyle[keyName].abbreviation;
 
                   return currentItemStyle[keyName].options
                     ? this.renderPropDropDown(
@@ -172,7 +182,7 @@ export default class FlexBoxCustomizable extends Component {
                       )
                     : this.renderInputBox(
                         keyName,
-                        itemDesc,
+                        abbreviation,
                         itemValue,
                         currentItemIndex
                       );
