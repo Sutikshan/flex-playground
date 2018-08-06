@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FlexBox from './FlexBox';
 import FlexBoxConstants from '../FlexBoxConstants';
+import PropDropDown from '../../CssPropInputs/PropWithOptions';
+import PropInput from '../../CssPropInputs/PropInput';
+
 import './Customizable.css';
 
 export default class FlexBoxCustomizable extends Component {
@@ -60,58 +63,6 @@ export default class FlexBoxCustomizable extends Component {
     this.onItemClick = (index) => {
       this.setState({ currentItemIndex: index });
     };
-
-    this.renderPropDropDown = (
-      keyName,
-      propToCustomize,
-      onChange,
-      index,
-      value,
-      abbreviation
-    ) => (
-      <div key={keyName} className="prop-key-value-pair">
-        <div className="prop-key">{propToCustomize.label}: </div>
-        <div className="prop-value">
-          <div>{abbreviation}</div>
-          <select
-            className="prop-value"
-            onChange={(event) => onChange(keyName, event.target.value, index)}
-            value={value}
-          >
-            {propToCustomize.options.map((propVal) => (
-              <option key={propVal}>{propVal}</option>
-            ))}
-          </select>
-        </div>
-      </div>
-    );
-
-    this.renderInputBox = (
-      keyName,
-      abbreviation,
-      itemValue,
-      currentItemIndex
-    ) => (
-      <div key={keyName} className="prop-key-value-pair">
-        <div className="prop-key">
-          {keyName}
-          {`(Item ${this.state.currentItemIndex})`}:{' '}
-        </div>
-        <div className="prop-value">
-          <div>{abbreviation}</div>
-          <input
-            value={itemValue}
-            onChange={(event) =>
-              this.onItemStyleChange(
-                keyName,
-                event.target.value,
-                currentItemIndex
-              )
-            }
-          />
-        </div>
-      </div>
-    );
   }
 
   render() {
@@ -150,15 +101,14 @@ export default class FlexBoxCustomizable extends Component {
           <div className="containe-props">
             <code>
               {Object.keys(allContainerPropsToCustomize).map((keyName) =>
-                this.renderPropDropDown(
-                  keyName,
-                  allContainerPropsToCustomize[keyName],
-                  this.onCustomStyleChange,
-                  0,
-                  allContainerPropsToCustomize[keyName].value,
-                  allContainerPropsToCustomize[keyName].abbreviation
-                )
-              )}
+                (<PropDropDown
+                  keyName={keyName}
+                  propToCustomize={allContainerPropsToCustomize[keyName]}
+                  onChange={this.onCustomStyleChange}
+                  value={this.state.customContainerStyles[keyName] ||
+                    allContainerPropsToCustomize[keyName].value}
+                  abbreviation={allContainerPropsToCustomize[keyName].abbreviation}
+                />))}
             </code>
           </div>
           {allItemPropsToCustomize ? (
@@ -173,19 +123,19 @@ export default class FlexBoxCustomizable extends Component {
                     currentItemStyle && currentItemStyle[keyName].abbreviation;
 
                   return currentItemStyle[keyName].options
-                    ? this.renderPropDropDown(
-                        keyName,
-                        currentItemStyle[keyName],
-                        this.onItemStyleChange,
-                        currentItemIndex,
-                        itemValue
-                      )
-                    : this.renderInputBox(
-                        keyName,
-                        abbreviation,
-                        itemValue,
-                        currentItemIndex
-                      );
+                    ? <PropDropDown
+                      keyName={keyName}
+                      propToCustomize={currentItemStyle[keyName]}
+                      onChange={this.onItemStyleChange}
+                      value={itemValue}
+                      index={currentItemIndex}
+                    />
+                    : <PropInput
+                      keyName={keyName}
+                      abbreviation={abbreviation}
+                      value={itemValue}
+                      index={currentItemIndex}
+                    />;
                 })}
               </code>
             </div>

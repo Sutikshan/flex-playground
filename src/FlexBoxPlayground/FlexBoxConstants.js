@@ -1,4 +1,8 @@
 import PropTypes from 'prop-types';
+import {
+  PropWithOptionsPropType,
+  CssPropertyObjectPropType,
+} from '../CssPropInputs/PropWithOptionsConstants';
 
 const widthOptions = [
   'auto',
@@ -133,30 +137,19 @@ const FlexItemsProps = {
   },
 };
 
-const FlexPropType = {
-  value: PropTypes.string,
-  label: PropTypes.string,
-  toolTipText: PropTypes.string,
-};
-
-const FlexContainerPropType = {
-  ...FlexPropType,
-  options: PropTypes.arrayOf(PropTypes.string),
-};
-
 const FlexContainerPropTypes = {
-  display: PropTypes.shape(FlexContainerPropType),
-  flexDirection: PropTypes.shape(FlexContainerPropType),
-  flexWrap: PropTypes.shape(FlexContainerPropType),
-  flexFlow: PropTypes.shape(FlexContainerPropType),
-  justifyContent: PropTypes.shape(FlexContainerPropType),
-  alignContent: PropTypes.shape(FlexContainerPropType),
-  alignItems: PropTypes.shape(FlexContainerPropType),
-  height: PropTypes.shape(FlexContainerPropType),
+  display: PropTypes.shape(PropWithOptionsPropType),
+  flexDirection: PropTypes.shape(PropWithOptionsPropType),
+  flexWrap: PropTypes.shape(PropWithOptionsPropType),
+  flexFlow: PropTypes.shape(PropWithOptionsPropType),
+  justifyContent: PropTypes.shape(PropWithOptionsPropType),
+  alignContent: PropTypes.shape(PropWithOptionsPropType),
+  alignItems: PropTypes.shape(PropWithOptionsPropType),
+  height: PropTypes.shape(PropWithOptionsPropType),
 };
 
 const FlexItemPropTypes = {
-  flex: PropTypes.shape(FlexPropType),
+  flex: PropTypes.shape(CssPropertyObjectPropType),
 };
 
 const DefaultContainerProps = {
